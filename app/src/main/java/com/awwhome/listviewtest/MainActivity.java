@@ -59,16 +59,23 @@ public class MainActivity extends AppCompatActivity {
 
         // 返回一个view对象，作为条目上的显示内容，该方法返回什么样子的view，listview的条目上就显示什么样子的view。必须实现
         // 屏幕上每显示一个条目，该方法就被调用一次
+        // convertView曾经使用过的对象，可以被重新使用，使用前要判断是否为空。
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            TextView textView = new TextView(mContext);
+            TextView view = null;
 
-            textView.setText("position:" + position);
+            if (convertView != null){
+                view = (TextView) convertView;
+            }else {
+                view = new TextView(mContext);
+            }
+
+            view.setText("position:" + position);
 
             Log.d(TAG, "position:" + position);
 
-            return textView;
+            return view;
         }
     }
 }
